@@ -3,9 +3,9 @@ const { env } = require("process");
 const { response } = require ('express');
 const xlsxFile = require('read-excel-file/node');
 
-const CatalogoGeneral= require('../models/catalogoGeneral');
-const CatalogoCIE10= require('../models/catalogoCIE10');
-const CatalogoCIE9= require('../models/catalogoCIE9');
+const CatalogoGeneral= require('../models/generales/catalogoGeneral');
+const CatalogoCIE10= require('../models/medicos/catalogoCIE10');
+const CatalogoCIE9= require('../models/medicos/catalogoCIE9');
 const { catalogoGeneral,catalogoCIE10,catalogoCIE9} = require('../models/catalogo');
 
 const dataCatalogosXLS = () =>{
