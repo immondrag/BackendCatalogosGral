@@ -1,42 +1,42 @@
 /*
-    Mesess
-    ruta: '/api/meses'
+    Estados
+    ruta: '/api/estado'
 */
 const { Router } = require('express');
 const { validarCampos } = require('../../middlewares/validar-campos');
 
 const {
-    getMeses,
-    crearMeses,
-    actualizarMeses,
-    borrarMeses,
-    getMesesById
-} = require('../../controllers/sat/meses')
+    getEstado,
+    crearEstado,
+    actualizarEstado,
+    borrarEstado,
+    getEstadoById
+} = require('../../controllers/localizacion/estado')
 
 const router = Router();
 
-router.get( '/', getMeses);
+router.get( '/', getEstado);
 
 router.post( '/',
     [
         validarCampos
     ], 
-    crearMeses 
+    crearEstado 
 );
 
 router.put( '/:id',
     [
         validarCampos
     ],
-    actualizarMeses
+    actualizarEstado
 );
 
 router.delete( '/:id',
-    borrarMeses
+    borrarEstado
 );
 
 router.get( '/:id',
-    getMesesById
+    getEstadoById
 );
 
 module.exports = router;

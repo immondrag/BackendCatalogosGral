@@ -2,6 +2,11 @@ const { response } = require('express');
 
 const CatalogoGeneral = require('../../models/generales/catalogoGeneral');
 
+/*
+Sat
+Aduana
+
+*/
 const getCatalogoGeneral = async(req, res = response) => {
     const catalogoGenerals = await CatalogoGeneral.find(req.query);
     res.json({

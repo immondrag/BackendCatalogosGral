@@ -1,42 +1,42 @@
 /*
-    ObjetoImps
-    ruta: '/api/objetoImp'
+    Municipios
+    ruta: '/api/municipio'
 */
 const { Router } = require('express');
 const { validarCampos } = require('../../middlewares/validar-campos');
 
 const {
-    getObjetoImp,
-    crearObjetoImp,
-    actualizarObjetoImp,
-    borrarObjetoImp,
-    getObjetoImpById
-} = require('../../controllers/sat/objetoImp')
+    getMunicipio,
+    crearMunicipio,
+    actualizarMunicipio,
+    borrarMunicipio,
+    getMunicipioById
+} = require('../../controllers/localizacion/municipio')
 
 const router = Router();
 
-router.get( '/', getObjetoImp);
+router.get( '/', getMunicipio);
 
 router.post( '/',
     [
         validarCampos
     ], 
-    crearObjetoImp 
+    crearMunicipio 
 );
 
 router.put( '/:id',
     [
         validarCampos
     ],
-    actualizarObjetoImp
+    actualizarMunicipio
 );
 
 router.delete( '/:id',
-    borrarObjetoImp
+    borrarMunicipio
 );
 
 router.get( '/:id',
-    getObjetoImpById
+    getMunicipioById
 );
 
 module.exports = router;

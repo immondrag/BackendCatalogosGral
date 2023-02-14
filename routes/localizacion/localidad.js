@@ -1,42 +1,42 @@
 /*
-    Paiss
-    ruta: '/api/pais'
+    Localidads
+    ruta: '/api/localidad'
 */
 const { Router } = require('express');
 const { validarCampos } = require('../../middlewares/validar-campos');
 
 const {
-    getPais,
-    crearPais,
-    actualizarPais,
-    borrarPais,
-    getPaisById
-} = require('../../controllers/sat/pais')
+    getLocalidad,
+    crearLocalidad,
+    actualizarLocalidad,
+    borrarLocalidad,
+    getLocalidadById
+} = require('../../controllers/localizacion/localidad')
 
 const router = Router();
 
-router.get( '/', getPais);
+router.get( '/', getLocalidad);
 
 router.post( '/',
     [
         validarCampos
     ], 
-    crearPais 
+    crearLocalidad 
 );
 
 router.put( '/:id',
     [
         validarCampos
     ],
-    actualizarPais
+    actualizarLocalidad
 );
 
 router.delete( '/:id',
-    borrarPais
+    borrarLocalidad
 );
 
 router.get( '/:id',
-    getPaisById
+    getLocalidadById
 );
 
 module.exports = router;

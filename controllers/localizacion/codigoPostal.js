@@ -1,27 +1,27 @@
 const { response } = require('express');
 
-const Aduana = require('../../models/sat/aduana');
+const CodigoPostal = require('../../models/localizacion/codigoPostal');
 
-const getAduana = async(req, res = response) => {
+const getCodigoPostal = async(req, res = response) => {
 
-    const aduanas = await Aduana.find();
+    const codigoPostals = await CodigoPostal.find();
 
     res.json({
         ok: true,
-        aduanas
+        codigoPostals
     })
 }
 
-const getAduanaById = async(req, res = response) => {
+const getCodigoPostalById = async(req, res = response) => {
 
     const id = req.params.id;
 
     try {
-        const aduana = await Aduana.findById(id);
+        const codigoPostal = await CodigoPostal.findById(id);
     
         res.json({
             ok: true,
-            aduana
+            codigoPostal
         })
         
     } catch (error) {
@@ -33,19 +33,19 @@ const getAduanaById = async(req, res = response) => {
     }
 }
 
-const crearAduana = async (req, res = response) => {
+const crearCodigoPostal = async (req, res = response) => {
 
     const uid = req.uid;
-    const aduana = new Aduana({
+    const codigoPostal = new CodigoPostal({
         usuario: uid,
         ...req.body
     });
     try {
 
-        const aduanaDB = await aduana.save();
+        const codigoPostalDB = await codigoPostal.save();
         res.json({
             ok: true,
-            aduana: aduanaDB
+            codigoPostal: codigoPostalDB
         })
 
     } catch (error) {
@@ -59,33 +59,33 @@ const crearAduana = async (req, res = response) => {
 
 }
 
-const actualizarAduana = async(req, res = response) => {
+const actualizarCodigoPostal = async(req, res = response) => {
     
     const id  = req.params.id;
     const uid = req.uid;
 
     try {
         
-        const aduana = await Aduana.findById( id );
+        const codigoPostal = await CodigoPostal.findById( id );
 
-        if ( !aduana ) {
+        if ( !codigoPostal ) {
             return res.status(404).json({
                 ok: true,
-                msg: 'Aduana no encontrado por id',
+                msg: 'CodigoPostal no encontrado por id',
             });
         }
 
-        const cambiosAduana = {
+        const cambiosCodigoPostal = {
             ...req.body,
             usuario: uid
         }
 
-        const aduanaActualizado = await Aduana.findByIdAndUpdate( id, cambiosAduana, { new: true } );
+        const codigoPostalActualizado = await CodigoPostal.findByIdAndUpdate( id, cambiosCodigoPostal, { new: true } );
 
 
         res.json({
             ok: true,
-            aduana: aduanaActualizado
+            codigoPostal: codigoPostalActualizado
         })
 
     } catch (error) {
@@ -100,26 +100,26 @@ const actualizarAduana = async(req, res = response) => {
 
 }
 
-const borrarAduana = async (req, res = response) => {
+const borrarCodigoPostal = async (req, res = response) => {
    
     const id  = req.params.id;
 
     try {
         
-        const aduana = await Aduana.findById( id );
+        const codigoPostal = await CodigoPostal.findById( id );
 
-        if ( !aduana ) {
+        if ( !codigoPostal ) {
             return res.status(404).json({
                 ok: true,
-                msg: 'Aduana no encontrado por id',
+                msg: 'CodigoPostal no encontrado por id',
             });
         }
 
-        await Aduana.findByIdAndDelete( id );
+        await CodigoPostal.findByIdAndDelete( id );
 
         res.json({
             ok: true,
-            msg: 'Aduana borrado'
+            msg: 'CodigoPostal borrado'
         }); 
 
     } catch (error) {
@@ -137,9 +137,9 @@ const borrarAduana = async (req, res = response) => {
 
 
 module.exports = {
-    getAduana,
-    crearAduana,
-    actualizarAduana,
-    borrarAduana,
-    getAduanaById
+    getCodigoPostal,
+    crearCodigoPostal,
+    actualizarCodigoPostal,
+    borrarCodigoPostal,
+    getCodigoPostalById
 }

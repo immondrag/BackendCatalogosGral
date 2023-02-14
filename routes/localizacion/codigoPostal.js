@@ -11,7 +11,7 @@ const {
     actualizarCodigoPostal,
     borrarCodigoPostal,
     getCodigoPostalById
-} = require('../../controllers/sat/codigoPostal')
+} = require('../../controllers/localizacion/codigoPostal')
 
 const router = Router();
 

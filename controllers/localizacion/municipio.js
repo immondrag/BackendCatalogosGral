@@ -1,27 +1,27 @@
 const { response } = require('express');
 
-const PatenteAduanal = require('../../models/sat/patenteAduanal');
+const Municipio = require('../../models/localizacion/municipio');
 
-const getPatenteAduanal = async(req, res = response) => {
+const getMunicipio = async(req, res = response) => {
 
-    const patenteAduanals = await PatenteAduanal.find();
+    const municipios = await Municipio.find();
 
     res.json({
         ok: true,
-        patenteAduanals
+        municipios
     })
 }
 
-const getPatenteAduanalById = async(req, res = response) => {
+const getMunicipioById = async(req, res = response) => {
 
     const id = req.params.id;
 
     try {
-        const patenteAduanal = await PatenteAduanal.findById(id);
+        const municipio = await Municipio.findById(id);
     
         res.json({
             ok: true,
-            patenteAduanal
+            municipio
         })
         
     } catch (error) {
@@ -33,19 +33,19 @@ const getPatenteAduanalById = async(req, res = response) => {
     }
 }
 
-const crearPatenteAduanal = async (req, res = response) => {
+const crearMunicipio = async (req, res = response) => {
 
     const uid = req.uid;
-    const patenteAduanal = new PatenteAduanal({
+    const municipio = new Municipio({
         usuario: uid,
         ...req.body
     });
     try {
 
-        const patenteAduanalDB = await patenteAduanal.save();
+        const municipioDB = await municipio.save();
         res.json({
             ok: true,
-            patenteAduanal: patenteAduanalDB
+            municipio: municipioDB
         })
 
     } catch (error) {
@@ -59,33 +59,33 @@ const crearPatenteAduanal = async (req, res = response) => {
 
 }
 
-const actualizarPatenteAduanal = async(req, res = response) => {
+const actualizarMunicipio = async(req, res = response) => {
     
     const id  = req.params.id;
     const uid = req.uid;
 
     try {
         
-        const patenteAduanal = await PatenteAduanal.findById( id );
+        const municipio = await Municipio.findById( id );
 
-        if ( !patenteAduanal ) {
+        if ( !municipio ) {
             return res.status(404).json({
                 ok: true,
-                msg: 'PatenteAduanal no encontrado por id',
+                msg: 'Municipio no encontrado por id',
             });
         }
 
-        const cambiosPatenteAduanal = {
+        const cambiosMunicipio = {
             ...req.body,
             usuario: uid
         }
 
-        const patenteAduanalActualizado = await PatenteAduanal.findByIdAndUpdate( id, cambiosPatenteAduanal, { new: true } );
+        const municipioActualizado = await Municipio.findByIdAndUpdate( id, cambiosMunicipio, { new: true } );
 
 
         res.json({
             ok: true,
-            patenteAduanal: patenteAduanalActualizado
+            municipio: municipioActualizado
         })
 
     } catch (error) {
@@ -100,26 +100,26 @@ const actualizarPatenteAduanal = async(req, res = response) => {
 
 }
 
-const borrarPatenteAduanal = async (req, res = response) => {
+const borrarMunicipio = async (req, res = response) => {
    
     const id  = req.params.id;
 
     try {
         
-        const patenteAduanal = await PatenteAduanal.findById( id );
+        const municipio = await Municipio.findById( id );
 
-        if ( !patenteAduanal ) {
+        if ( !municipio ) {
             return res.status(404).json({
                 ok: true,
-                msg: 'PatenteAduanal no encontrado por id',
+                msg: 'Municipio no encontrado por id',
             });
         }
 
-        await PatenteAduanal.findByIdAndDelete( id );
+        await Municipio.findByIdAndDelete( id );
 
         res.json({
             ok: true,
-            msg: 'PatenteAduanal borrado'
+            msg: 'Municipio borrado'
         }); 
 
     } catch (error) {
@@ -137,9 +137,9 @@ const borrarPatenteAduanal = async (req, res = response) => {
 
 
 module.exports = {
-    getPatenteAduanal,
-    crearPatenteAduanal,
-    actualizarPatenteAduanal,
-    borrarPatenteAduanal,
-    getPatenteAduanalById
+    getMunicipio,
+    crearMunicipio,
+    actualizarMunicipio,
+    borrarMunicipio,
+    getMunicipioById
 }

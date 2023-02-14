@@ -1,42 +1,42 @@
 /*
-    Exportacions
-    ruta: '/api/exportacion'
+    Paiss
+    ruta: '/api/pais'
 */
 const { Router } = require('express');
 const { validarCampos } = require('../../middlewares/validar-campos');
 
 const {
-    getExportacion,
-    crearExportacion,
-    actualizarExportacion,
-    borrarExportacion,
-    getExportacionById
-} = require('../../controllers/sat/exportacion')
+    getPais,
+    crearPais,
+    actualizarPais,
+    borrarPais,
+    getPaisById
+} = require('../../controllers/localizacion/pais')
 
 const router = Router();
 
-router.get( '/', getExportacion);
+router.get( '/', getPais);
 
 router.post( '/',
     [
         validarCampos
     ], 
-    crearExportacion 
+    crearPais 
 );
 
 router.put( '/:id',
     [
         validarCampos
     ],
-    actualizarExportacion
+    actualizarPais
 );
 
 router.delete( '/:id',
-    borrarExportacion
+    borrarPais
 );
 
 router.get( '/:id',
-    getExportacionById
+    getPaisById
 );
 
 module.exports = router;

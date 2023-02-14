@@ -1,5 +1,19 @@
 //<%IniModeloBC%>
 const { Schema, model, Decimal128 } = require('mongoose');
+/* 
+Catalogos sat integrados 
+
+aduana
+exportacion
+Meses
+objetoImp
+patenteAduanal
+periodicidad
+moneda
+tipoFactor
+tipoRelacion
+*/
+
 const CatalogoGeneralSchema = Schema({
 claveCatalogo : { 
         type :String,
@@ -45,4 +59,3 @@ CatalogoGeneralSchema.method('toJSON', function() {
 })
 
 module.exports = model( 'CatalogoGeneral', CatalogoGeneralSchema );
-

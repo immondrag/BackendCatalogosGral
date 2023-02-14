@@ -1,27 +1,27 @@
 const { response } = require('express');
 
-const CodigoPostal = require('../../models/sat/codigoPostal');
+const Estado = require('../../models/localizacion/estado');
 
-const getCodigoPostal = async(req, res = response) => {
+const getEstado = async(req, res = response) => {
 
-    const codigoPostals = await CodigoPostal.find();
+    const estados = await Estado.find();
 
     res.json({
         ok: true,
-        codigoPostals
+        estados
     })
 }
 
-const getCodigoPostalById = async(req, res = response) => {
+const getEstadoById = async(req, res = response) => {
 
     const id = req.params.id;
 
     try {
-        const codigoPostal = await CodigoPostal.findById(id);
+        const estado = await Estado.findById(id);
     
         res.json({
             ok: true,
-            codigoPostal
+            estado
         })
         
     } catch (error) {
@@ -33,19 +33,19 @@ const getCodigoPostalById = async(req, res = response) => {
     }
 }
 
-const crearCodigoPostal = async (req, res = response) => {
+const crearEstado = async (req, res = response) => {
 
     const uid = req.uid;
-    const codigoPostal = new CodigoPostal({
+    const estado = new Estado({
         usuario: uid,
         ...req.body
     });
     try {
 
-        const codigoPostalDB = await codigoPostal.save();
+        const estadoDB = await estado.save();
         res.json({
             ok: true,
-            codigoPostal: codigoPostalDB
+            estado: estadoDB
         })
 
     } catch (error) {
@@ -59,33 +59,33 @@ const crearCodigoPostal = async (req, res = response) => {
 
 }
 
-const actualizarCodigoPostal = async(req, res = response) => {
+const actualizarEstado = async(req, res = response) => {
     
     const id  = req.params.id;
     const uid = req.uid;
 
     try {
         
-        const codigoPostal = await CodigoPostal.findById( id );
+        const estado = await Estado.findById( id );
 
-        if ( !codigoPostal ) {
+        if ( !estado ) {
             return res.status(404).json({
                 ok: true,
-                msg: 'CodigoPostal no encontrado por id',
+                msg: 'Estado no encontrado por id',
             });
         }
 
-        const cambiosCodigoPostal = {
+        const cambiosEstado = {
             ...req.body,
             usuario: uid
         }
 
-        const codigoPostalActualizado = await CodigoPostal.findByIdAndUpdate( id, cambiosCodigoPostal, { new: true } );
+        const estadoActualizado = await Estado.findByIdAndUpdate( id, cambiosEstado, { new: true } );
 
 
         res.json({
             ok: true,
-            codigoPostal: codigoPostalActualizado
+            estado: estadoActualizado
         })
 
     } catch (error) {
@@ -100,26 +100,26 @@ const actualizarCodigoPostal = async(req, res = response) => {
 
 }
 
-const borrarCodigoPostal = async (req, res = response) => {
+const borrarEstado = async (req, res = response) => {
    
     const id  = req.params.id;
 
     try {
         
-        const codigoPostal = await CodigoPostal.findById( id );
+        const estado = await Estado.findById( id );
 
-        if ( !codigoPostal ) {
+        if ( !estado ) {
             return res.status(404).json({
                 ok: true,
-                msg: 'CodigoPostal no encontrado por id',
+                msg: 'Estado no encontrado por id',
             });
         }
 
-        await CodigoPostal.findByIdAndDelete( id );
+        await Estado.findByIdAndDelete( id );
 
         res.json({
             ok: true,
-            msg: 'CodigoPostal borrado'
+            msg: 'Estado borrado'
         }); 
 
     } catch (error) {
@@ -137,9 +137,9 @@ const borrarCodigoPostal = async (req, res = response) => {
 
 
 module.exports = {
-    getCodigoPostal,
-    crearCodigoPostal,
-    actualizarCodigoPostal,
-    borrarCodigoPostal,
-    getCodigoPostalById
+    getEstado,
+    crearEstado,
+    actualizarEstado,
+    borrarEstado,
+    getEstadoById
 }

@@ -1,27 +1,27 @@
 const { response } = require('express');
 
-const Pais = require('../../models/sat/pais');
+const Colonia = require('../../models/localizacion/colonia');
 
-const getPais = async(req, res = response) => {
+const getColonia = async(req, res = response) => {
 
-    const paiss = await Pais.find();
+    const colonias = await Colonia.find();
 
     res.json({
         ok: true,
-        paiss
+        colonias
     })
 }
 
-const getPaisById = async(req, res = response) => {
+const getColoniaById = async(req, res = response) => {
 
     const id = req.params.id;
 
     try {
-        const pais = await Pais.findById(id);
+        const colonia = await Colonia.findById(id);
     
         res.json({
             ok: true,
-            pais
+            colonia
         })
         
     } catch (error) {
@@ -33,19 +33,19 @@ const getPaisById = async(req, res = response) => {
     }
 }
 
-const crearPais = async (req, res = response) => {
+const crearColonia = async (req, res = response) => {
 
     const uid = req.uid;
-    const pais = new Pais({
+    const colonia = new Colonia({
         usuario: uid,
         ...req.body
     });
     try {
 
-        const paisDB = await pais.save();
+        const coloniaDB = await colonia.save();
         res.json({
             ok: true,
-            pais: paisDB
+            colonia: coloniaDB
         })
 
     } catch (error) {
@@ -59,33 +59,33 @@ const crearPais = async (req, res = response) => {
 
 }
 
-const actualizarPais = async(req, res = response) => {
+const actualizarColonia = async(req, res = response) => {
     
     const id  = req.params.id;
     const uid = req.uid;
 
     try {
         
-        const pais = await Pais.findById( id );
+        const colonia = await Colonia.findById( id );
 
-        if ( !pais ) {
+        if ( !colonia ) {
             return res.status(404).json({
                 ok: true,
-                msg: 'Pais no encontrado por id',
+                msg: 'Colonia no encontrado por id',
             });
         }
 
-        const cambiosPais = {
+        const cambiosColonia = {
             ...req.body,
             usuario: uid
         }
 
-        const paisActualizado = await Pais.findByIdAndUpdate( id, cambiosPais, { new: true } );
+        const coloniaActualizado = await Colonia.findByIdAndUpdate( id, cambiosColonia, { new: true } );
 
 
         res.json({
             ok: true,
-            pais: paisActualizado
+            colonia: coloniaActualizado
         })
 
     } catch (error) {
@@ -100,26 +100,26 @@ const actualizarPais = async(req, res = response) => {
 
 }
 
-const borrarPais = async (req, res = response) => {
+const borrarColonia = async (req, res = response) => {
    
     const id  = req.params.id;
 
     try {
         
-        const pais = await Pais.findById( id );
+        const colonia = await Colonia.findById( id );
 
-        if ( !pais ) {
+        if ( !colonia ) {
             return res.status(404).json({
                 ok: true,
-                msg: 'Pais no encontrado por id',
+                msg: 'Colonia no encontrado por id',
             });
         }
 
-        await Pais.findByIdAndDelete( id );
+        await Colonia.findByIdAndDelete( id );
 
         res.json({
             ok: true,
-            msg: 'Pais borrado'
+            msg: 'Colonia borrado'
         }); 
 
     } catch (error) {
@@ -137,9 +137,9 @@ const borrarPais = async (req, res = response) => {
 
 
 module.exports = {
-    getPais,
-    crearPais,
-    actualizarPais,
-    borrarPais,
-    getPaisById
+    getColonia,
+    crearColonia,
+    actualizarColonia,
+    borrarColonia,
+    getColoniaById
 }

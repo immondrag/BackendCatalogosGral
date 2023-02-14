@@ -1,6 +1,6 @@
 const { response } = require('express');
 
-const Localidad = require('../../models/sat/localidad');
+const Localidad = require('../../models/localizacion/localidad');
 
 const getLocalidad = async(req, res = response) => {
 

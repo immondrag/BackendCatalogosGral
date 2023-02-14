@@ -1,42 +1,42 @@
 /*
-    Impuestos
-    ruta: '/api/impuesto'
+    Colonias
+    ruta: '/api/colonia'
 */
 const { Router } = require('express');
 const { validarCampos } = require('../../middlewares/validar-campos');
 
 const {
-    getImpuesto,
-    crearImpuesto,
-    actualizarImpuesto,
-    borrarImpuesto,
-    getImpuestoById
-} = require('../../controllers/sat/impuesto')
+    getColonia,
+    crearColonia,
+    actualizarColonia,
+    borrarColonia,
+    getColoniaById
+} = require('../../controllers/localizacion/colonia')
 
 const router = Router();
 
-router.get( '/', getImpuesto);
+router.get( '/', getColonia);
 
 router.post( '/',
     [
         validarCampos
     ], 
-    crearImpuesto 
+    crearColonia 
 );
 
 router.put( '/:id',
     [
         validarCampos
     ],
-    actualizarImpuesto
+    actualizarColonia
 );
 
 router.delete( '/:id',
-    borrarImpuesto
+    borrarColonia
 );
 
 router.get( '/:id',
-    getImpuestoById
+    getColoniaById
 );
 
 module.exports = router;
